@@ -9,13 +9,18 @@ A lightweight, header-only C++23 library for working with complex numbers using 
 - **Header-only:** Easy to integrate into existing C++ projects.
 - **C++23:** Uses modern C++ language features.
 - **Template-based:** Supports floating-point types such as `float`, `double`, and `long double`.
-- **Operator overloading:** Planned support for natural arithmetic operations.
-- **Type constraints:** Uses C++ concepts to restrict supported numeric types.
-- **CMake integration:** Simple, standardized build configuration.
-- **Testing:** CTest integration for automated tests.
-- **Compiler support:** Designed for compatible Clang and GCC toolchains.
+- **Operator overloading:** Supports addition, subtraction, multiplication, and division of complex numbers.
+- **Compound assignment:** Supports `+=`, `-=`, `*=`, and `/=`.
+- **Type constraints:** Uses the `std::floating_point` concept to restrict supported types.
+- **Comparison operators:** Supports equality (`==`) and inequality (`!=`).
+- **Accessors and setters:** Provides access to and modification of real and imaginary components.
+- **Stream operators:** Supports input (`>>`) and output (`<<`).
+- **Complex conjugate:** Provides a `conj()` member function.
+- **CMake integration:** Supports configuration and builds through CMake presets.
+- **Testing:** Includes a test source file and CTest integration.
+- **Compiler support:** Configured for Clang and GCC toolchains.
 
-> Note: Features described as planned should be marked complete as they are implemented and tested.
+> Note: Division by zero and extreme floating-point values are not explicitly handled. Stream output formatting for negative imaginary components can also be improved.
 
 ## Project Structure
 
@@ -51,8 +56,6 @@ git clone https://github.com/CodeWithMSami/ComplexNumber.git
 cd ComplexNumber
 ```
 
-Replace the repository URL if you publish the project under a different name or account.
-
 ### 2. Configure the project
 
 Configure using the Clang Debug preset:
@@ -87,7 +90,7 @@ cmake --build --preset gcc-release
 ctest --preset clang-debug
 ```
 
-The example and test source files must be implemented before these targets can build successfully.
+The test source covers constructors, accessors, setters, arithmetic operators, compound assignments, comparisons, stream operations, and complex conjugation. Division tests currently cover ordinary, nonzero divisors.
 
 ## Library Usage
 
@@ -97,22 +100,20 @@ Include the library header in your C++ project:
 #include <complex.hpp>
 ```
 
-The header is exposed through the CMake target `ComplexNumber`. Link your executable against this target to inherit the library's include directory and C++23 requirement.
+The `Complex<T>` class provides constructors, accessors, setters, arithmetic and compound assignment operators, equality comparisons, stream input/output, and complex conjugation.
 
-The exact class API and supported operations will be documented here as the implementation develops.
+The header is intended to be exposed through the CMake target `ComplexNumber`, allowing consuming targets to inherit its include directory and C++23 requirement.
 
 ## Development Goals
 
-- [ ] Implement the templated `Complex` class.
-- [ ] Add constructors and accessors.
-- [ ] Implement arithmetic operators.
-- [ ] Implement compound assignment operators.
-- [ ] Add equality comparisons.
-- [ ] Add stream output support.
-- [ ] Handle division-by-zero cases.
-- [ ] Add unit tests and edge-case coverage.
-- [ ] Document the public API with examples.
-- [ ] Add continuous integration with GitHub Actions.
+- [x] Implement the templated `Complex<T>` class.
+- [x] Add constructors and accessors.
+- [x] Implement arithmetic operators.
+- [x] Implement compound assignment operators.
+- [x] Add equality comparisons.
+- [x] Add stream input and output support.
+- [x] Implement complex conjugation.
+- [x] Add an example program and test source.
 
 ## Design Philosophy
 
@@ -141,4 +142,4 @@ GitHub: [@CodeWithMSami](https://github.com/CodeWithMSami)
 
 ---
 
-*Built as a modern C++ learning and showcase project.*
+*Built as a modern C++ showcase project.*
